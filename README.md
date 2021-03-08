@@ -1,6 +1,6 @@
-#ViBiBa
+# ViBiBa
 
-#Cite
+# Cite
 While our manuscript is under submission, please cite:
 H Asperger, J-P Cieslik et al. (2021) "ViBiBa: VirtualBioBanking for the DETECT multicenter trial program - decentralized storage and processing" Manuscript submitted for publication
 # Getting Started
