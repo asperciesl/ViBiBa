@@ -1,0 +1,187 @@
+/* stylelint-disable selector-list-comma-newline-after */
+
+
+/* CUSTOM */
+
+body {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+.form_sample label {
+    font-weight: bold
+}
+
+.card-header {
+    font-size: 1.6em;
+    font-weight: bold
+}
+
+.card-body {
+    padding-top: 23px;
+    padding-bottom: 23px
+}
+
+.column_1 {
+    background-color: rgba(138, 210, 101, 0.25);
+}
+
+.column_2 {
+    background-color: rgba(66, 166, 252, 0.22);
+}
+
+
+/* CUSTOM END */
+.blog-header {
+    line-height: 1;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-header-logo {
+    font-size: 2.25rem;
+}
+
+.blog-header-logo:hover {
+    text-decoration: none;
+}
+
+
+.display-4 {
+    font-size: 2.5rem;
+}
+@media (min-width: 768px) {
+    .display-4 {
+        font-size: 3rem;
+    }
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-scroller .nav-link {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: .875rem;
+}
+
+.card-img-right {
+    height: 100%;
+    border-radius: 0 3px 3px 0;
+}
+
+.flex-auto {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+.h-250 { height: 250px; }
+@media (min-width: 768px) {
+    .h-md-250 { height: 250px; }
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+/*
+ * Blog name and description
+ */
+.blog-title {
+    margin-bottom: 0;
+    font-size: 2rem;
+    font-weight: 400;
+}
+.blog-description {
+    font-size: 1.1rem;
+    color: #999;
+}
+
+@media (min-width: 40em) {
+    .blog-title {
+        font-size: 3.5rem;
+    }
+}
+
+/* Pagination */
+.blog-pagination {
+    margin-bottom: 4rem;
+}
+.blog-pagination > .btn {
+    border-radius: 2rem;
+}
+
+/*
+ * Blog posts
+ */
+.blog-post {
+    margin-bottom: 4rem;
+}
+.blog-post-title {
+    margin-bottom: .25rem;
+    font-size: 2.5rem;
+}
+.blog-post-meta {
+    margin-bottom: 1.25rem;
+    color: #999;
+}
+
+/*
+ * Footer
+ */
+.blog-footer {
+    padding: 2.5rem 0;
+    color: #999;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+}
+.blog-footer p:last-child {
+    margin-bottom: 0;
+}
+
+/*
+* ETC
+ */
+
+.form_sample label {
+    font-weight: bold
+}
+
+.card-header {
+    font-size: 1.6em;
+    font-weight: bold
+}
+
+.card-body {
+    padding-top: 23px;
+    padding-bottom: 23px
+}
+
+.column_1 {
+    background-color: rgba(138, 210, 101, 0.25);
+}
+
+.column_2 {
+    background-color: rgba(66, 166, 252, 0.22);
+}
+
+.button_bar_buttons {
+    margin-left: 5px;
+}

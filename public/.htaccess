@@ -1,0 +1,14 @@
+SetEnv root_path /
+DirectorySlash Off
+
+ErrorDocument 404 /router.php?error=404
+ErrorDocument 403 /router.php?error=403
+ErrorDocument 500 /router.php?error=500
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RedirectMatch ^/$ /app/dashboard
+RewriteRule ^app/(.*)$ /router.php [L,QSA]
+RewriteRule ^api/(.*)$ /router.php [L,QSA]

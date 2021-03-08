@@ -1,0 +1,6 @@
+conf/config.php
+.idea/*
+public/vendor/*
+public/vendor
+public/plugins
+mysql_dump/
