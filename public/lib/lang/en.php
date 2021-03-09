@@ -4,7 +4,7 @@
  ************ UI ************
  ****************************/
 
-$_LANG['ui']['footer'] = "Virtual BioBanking (ViBiBa) is an Open Source platform for intelligent distributed sample management. To find out more and for citation reference please visit ...";
+$_LANG['ui']['footer'] = "Virtual BioBanking (ViBiBa) is an Open-Source platform for easy management of decentralised sample storage and processing as part of modern liquid biopsy multicenter trial groups. <br/>For citation information and further reference please visit our <a href='https://github.com/asperciesl/vibiba/'>GitHub</a> repository.";
 $_LANG['ui']['username'] = 'username';
 $_LANG['ui']['password'] = 'password';
 $_LANG['ui']['login'] = 'login';

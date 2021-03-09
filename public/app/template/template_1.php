@@ -35,11 +35,11 @@ require_once(__DIR__ . '/../../lib/autoload.php');
         </a>
 
         <?php
-        if (!empty($_APP))
+        if (!empty($_APP)) {
             foreach ($_APP['navigation'] as $heading) {
                 ?>
                 <hr class="sidebar-divider my-0">
-                <?
+                <?php
                 if (!empty($heading['name'])) {
                     ?>
                     <div class="sidebar-heading">
@@ -48,9 +48,9 @@ require_once(__DIR__ . '/../../lib/autoload.php');
                     <?php
                 }
                 foreach ($heading['entries'] as $entry) {
-                    if($_SERVER['REQUEST_URI'] == $entry['uri']){
+                    if ($_SERVER['REQUEST_URI'] == $entry['uri']) {
                         $active = 'active';
-                    }else{
+                    } else {
                         $active = '';
                     }
                     ?>
@@ -62,12 +62,13 @@ require_once(__DIR__ . '/../../lib/autoload.php');
                     <?php
                 }
             }
+        }
         ?>
 
         <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt"></i>
-                <span><?php echo ucwords($_SB->language_output('logout', "ui")); ?></span></a>
+                <span><?= ucwords($_SB->language_output('logout', "ui")) ?></span></a>
         </li>
 
         <!-- Divider -->
@@ -159,6 +160,8 @@ require_once(__DIR__ . '/../../lib/autoload.php');
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
                     <span><?= $_SB->config()['name'] ?> V. <?= $_SB->config()['version'] ?></span>
+                    <br/>
+                    <span><?= ucfirst($_SB->language_output('footer', "ui")) ?></span>
                 </div>
             </div>
         </footer>
@@ -231,7 +234,7 @@ if (!empty($_FOOTER)) {
                 require_once(__DIR__ . '/footer_presets/sample_table.php');
             } elseif ($entry['value'] == 'button_bar') {
                 require_once(__DIR__ . '/footer_presets/button_bar.php');
-            }elseif ($entry['value'] == 'callback') {
+            } elseif ($entry['value'] == 'callback') {
                 $_CALLBACK = $entry['args'];
                 require_once(__DIR__ . '/footer_presets/callback.php');
             }

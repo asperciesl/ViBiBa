@@ -5,8 +5,8 @@
     $fields_identifier = $fields['keys_single'];
     foreach ($fields_identifier as $field) {
         ?>
-        <input type="hidden" name="<?php echo $field; ?>"
-               value=<?php echo json_encode($_POST[$field]); ?>>
+        <input type="hidden" name="<?= $field ?>"
+               value=<?= json_encode($_POST[$field]) ?>>
         <?php
         #echo ' data-' . $field['field_name_internal'] . ' = ' . json_encode($_POST[$field['field_name_internal']]);
     }
@@ -26,7 +26,7 @@
         <?php
     }
     ?>
-    <input type="hidden" name="button_id" value="<?php echo $_POST['button_id'] ?>">
+    <input type="hidden" name="button_id" value="<?= $_POST['button_id'] ?>">
     <button type="submit" class="btn btn-primary basket_button" id="basket_button_<?php echo $_POST['button_id']; ?>">
         <?php
         if ($in_basket) {
@@ -38,17 +38,17 @@
     </button>
 </form>
 <script>
-    $("#basket_button_<?php echo $_POST['button_id']; ?>").click(function (event) {
+    $("#basket_button_<?= $_POST['button_id'] ?>").click(function (event) {
         event.preventDefault();
         var request_method = $(this).closest('form').attr("method");
         var form_data = $(this).closest('form').serializeArray();
         form_data.push({name: this.name, value: this.value});
         $.ajax({
-            url: '/api/button_basket/?<?php echo http_build_query($_GET); ?>',
+            url: '/api/button_basket/?<?= http_build_query($_GET) ?>',
             type: request_method,
             data: form_data
         }).done(function (response) { //
-            $("#basket_button_wrapper_<?php echo $_POST['button_id'] ?>").html(response);
+            $("#basket_button_wrapper_<?= $_POST['button_id'] ?>").html(response);
         });
     });
 </script>

@@ -64,7 +64,7 @@ function display_table($table_name, $header, $offset = NULL, $heading_class = NU
             if ($offset > 0) {
                 ?>
                 <th colspan="<?php echo $offset; ?>"></th>
-                <?
+                <?php
             }
             foreach ($header['parents'] as $parent) {
                 $parent_id = $parent['field_parent_id'];

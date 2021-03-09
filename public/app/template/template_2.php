@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?= ucfirst($_SB->language_output('login', "ui")); ?> &middot; <?php echo $_SB->config()['name']; ?></title>
+    <title><?= ucfirst($_SB->language_output('login', "ui")); ?> &middot; <?= $_SB->config()['name'] ?></title>
 
     <!-- Custom fonts for this template-->
     <link href="/assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

@@ -34,7 +34,7 @@
                                         <?php
                                         foreach ($_SB->user->ou_fetch() as $ou) {
                                             ?>
-                                            <option value='<?= $ou["ou_id"] ?>'><?= $ou["ou_name"] ?></option><?
+                                            <option value='<?= $ou["ou_id"] ?>'><?= $ou["ou_name"] ?></option><?php
                                         }
                                         ?>
                                     </select>

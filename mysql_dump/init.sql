@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Erstellungszeit: 09. Mrz 2021 um 14:53
+-- Erstellungszeit: 09. Mrz 2021 um 18:15
 -- Server-Version: 8.0.23
 -- PHP-Version: 7.4.13
 
@@ -1113,10 +1113,34 @@ ALTER TABLE `db_001_source_rights`
   ADD UNIQUE KEY `source_id` (`source_id`,`ou_id`);
 
 --
+-- Indizes für die Tabelle `db_config`
+--
+ALTER TABLE `db_config`
+  ADD PRIMARY KEY (`db_id`);
+
+--
 -- Indizes für die Tabelle `db_rights`
 --
 ALTER TABLE `db_rights`
   ADD PRIMARY KEY (`ou_id`,`db_id`);
+
+--
+-- Indizes für die Tabelle `main_groups`
+--
+ALTER TABLE `main_groups`
+  ADD PRIMARY KEY (`group_id`);
+
+--
+-- Indizes für die Tabelle `main_ou`
+--
+ALTER TABLE `main_ou`
+  ADD PRIMARY KEY (`ou_id`);
+
+--
+-- Indizes für die Tabelle `main_users`
+--
+ALTER TABLE `main_users`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indizes für die Tabelle `z_plugin_d1_mapping`
@@ -1154,6 +1178,12 @@ ALTER TABLE `db_001_fields`
   MODIFY `field_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
+-- AUTO_INCREMENT für Tabelle `db_001_orders`
+--
+ALTER TABLE `db_001_orders`
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT für Tabelle `db_001_samples`
 --
 ALTER TABLE `db_001_samples`
@@ -1176,6 +1206,30 @@ ALTER TABLE `db_001_source_002_interface`
 --
 ALTER TABLE `db_001_source_003_interface`
   MODIFY `sample_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT für Tabelle `db_config`
+--
+ALTER TABLE `db_config`
+  MODIFY `db_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT für Tabelle `main_groups`
+--
+ALTER TABLE `main_groups`
+  MODIFY `group_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT für Tabelle `main_ou`
+--
+ALTER TABLE `main_ou`
+  MODIFY `ou_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT für Tabelle `main_users`
+--
+ALTER TABLE `main_users`
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `z_plugin_d1_mapping`

@@ -349,7 +349,7 @@ class vibiba
         }
         $query .= "
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-        if (!$this->mysql->query($query)) {
+        if (!$this->mysql_w->query_safe($query)) {
             $this->alerts->add("error", "202/1");
             return false;
         }
@@ -357,22 +357,22 @@ class vibiba
         $query = "ALTER TABLE `$table`
 ADD PRIMARY KEY (`sample_id`),
 ADD KEY `ou_id` (`ou_id`);";
-        if (!$this->mysql->query($query)) {
+        if (!$this->mysql_w->query_safe($query)) {
             $this->alerts->add("error", "202/2");
             return false;
         }
 
         $query = "ALTER TABLE `$table`
 MODIFY `sample_id` int(20) NOT NULL AUTO_INCREMENT;";
-        if (!$this->mysql->query($query)) {
+        if (!$this->mysql_w->query_safe($query)) {
             $this->alerts->add("error", "202/3");
             return false;
         }
 
-        if (!empty($source_id)) {
+        if (!empty($source_id) and $source_id != 'cache') {
             $query = "ALTER TABLE `$table`
 ADD CONSTRAINT `" . $table . "_ou_id` FOREIGN KEY (`ou_id`) REFERENCES `main_ou` (`ou_id`);";
-            if (!$this->mysql->query($query)) {
+            if (!$this->mysql_w->query_safe($query)) {
                 $this->alerts->add("error", "202/4");
                 return false;
             }
@@ -385,7 +385,7 @@ ADD CONSTRAINT `" . $table . "_ou_id` FOREIGN KEY (`ou_id`) REFERENCES `main_ou`
             $table_main_fields = "db_" . $dbn . "_fields";
 
             $query = "DESCRIBE `$table`";
-            if ($this->mysql->query($query)) {
+            if ($this->mysql_w->query_safe($query)) {
                 return true;
             }
 
@@ -394,7 +394,7 @@ ADD CONSTRAINT `" . $table . "_ou_id` FOREIGN KEY (`ou_id`) REFERENCES `main_ou`
 `source_field_enabled` tinyint(1) NOT NULL DEFAULT '0',
 `source_field_position` int(10) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-            if (!$this->mysql->query($query)) {
+            if (!$this->mysql_w->query_safe($query)) {
                 $this->alerts->add("error", '202/5');
                 return false;
             }
@@ -402,14 +402,14 @@ ADD CONSTRAINT `" . $table . "_ou_id` FOREIGN KEY (`ou_id`) REFERENCES `main_ou`
             $query = "ALTER TABLE `$table`
 ADD PRIMARY KEY (`field_id`),
 ADD UNIQUE(`source_field_position`);";
-            if (!$this->mysql->query($query)) {
+            if (!$this->mysql_w->query_safe($query)) {
                 $this->alerts->add("error", '202/6');
                 return false;
             }
 
             $query = "ALTER TABLE `$table`
 ADD CONSTRAINT `" . $table . "_field_id` FOREIGN KEY (`field_id`) REFERENCES `" . $table_main_fields . "` (`field_id`);";
-            if (!$this->mysql->query($query)) {
+            if (!$this->mysql_w->query_safe($query)) {
                 $this->alerts->add("error", '202/7');
                 return false;
             }
@@ -534,6 +534,7 @@ ADD CONSTRAINT `" . $table . "_field_id` FOREIGN KEY (`field_id`) REFERENCES `" 
             $this->alerts->add("error", '402');
             return false;
         }
+        $this->cache->clear('all');
         $this->current['db_id'] = $db_id;
         $this->db_fields_display_set_default();
         return true;

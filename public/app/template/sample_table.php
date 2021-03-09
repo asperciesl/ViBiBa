@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../../lib/autoload.php');
         $counter = 0;
         if (!empty($_SITE['sample_table']['offset'])) {
             ?>
-        <th colspan="<?= $_SITE['sample_table']['offset'] ?>"></th><?
+        <th colspan="<?= $_SITE['sample_table']['offset'] ?>"></th><?php
         }
         foreach ($_SB->db_fields_fetch(true)['parents_ordered'] as $parent) {
             $parent_id = $parent['field_parent_id'];
@@ -22,14 +22,14 @@ require_once(__DIR__ . '/../../lib/autoload.php');
         <th colspan="<?= count($_SB->db_fields_fetch(true)['hierarchy'][$parent_id]) ?>"
             class="<?= $heading_class[$parent_id] ?>">
             <?= $parent['field_parent_name_' . $_SB->lang()] ?>
-            </th><?
+            </th><?php
         }
         ?>
     </tr>
     <tr>
         <?php
         if (!empty($_SITE['sample_table']['offset'])) {
-            ?><th colspan="' . $_SITE['sample_table']['offset'] . '"></th><?
+            ?><th colspan="' . $_SITE['sample_table']['offset'] . '"></th><?php
         }
         foreach ($_SB->db_fields_fetch(true)['hierarchy_ordered'] as $parent) {
             foreach ($parent as $field) {

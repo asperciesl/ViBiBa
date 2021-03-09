@@ -61,6 +61,22 @@ class mysqli_wrapper
     }
 
     /**
+     * Executes Query and throws error if not successful
+     * @param string $query Query
+     * @return bool
+     */
+    public function query_safe($query)
+    {
+        if ($this->mysql->query($query)) {
+            return true;
+        } else {
+            trigger_error($this->mysql->error, E_USER_WARNING);
+            trigger_error("Offending Query: ".$query, E_USER_WARNING);
+            return false;
+        }
+    }
+
+    /**
      * Wrapper for mysql_insert_statement_multiple. If more than 10 datasets are passed, the dataset is split up in pairs of 10
      * @param array $data Data to insert
      * @param string $table Name of the mysql table
@@ -123,7 +139,7 @@ class mysqli_wrapper
                 if (!empty($values[$row_id])) {
                     $values[$row_id] .= ", ";
                 }
-                if (!isset($row_value[$col]) or $row_value[$col] === 'NULL' or $row_value[$col] === '' or trim($row_value[$col]) ==='') {
+                if (!isset($row_value[$col]) or $row_value[$col] === 'NULL' or $row_value[$col] === '' or trim($row_value[$col]) === '') {
                     $values[$row_id] .= "NULL";
                 } else {
                     if (is_bool($row_value[$col])) {
