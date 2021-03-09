@@ -1,0 +1,24 @@
+{
+  "name": "Düsseldorf Import Plugin (Serum)",
+  "description": "maps and converts data from the Serum xlsx file from Düsseldorf",
+  "upload": [
+    {
+      "name": "Serum Table",
+      "name_internal": "serum",
+      "description": "Please check the option for continous import, to allow for multiple worksheets",
+      "destination": "z_plugin_d3_data",
+      "fields": [
+        "Kiste_Nr",
+        "Studie",
+        "SampleID",
+        "PatID",
+        "Datum",
+        "Anzahl_Aliquots",
+        "ungef_Vol",
+        "entnommen_am",
+        "verschickt_nach"
+      ]
+    }
+  ],
+  "mapping_table" : "z_plugin_d3_mapping"
+}

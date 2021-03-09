@@ -1,0 +1,46 @@
+{
+  "name": "Regensburg Import Plugin",
+  "description": "maps and converts data from Regensburg",
+  "upload": [
+    {
+      "name": "Overview",
+      "name_internal": "Overview",
+      "description": "The first worksheet named 'Overview'",
+      "destination": "z_plugin_d1_overview",
+      "fields": [
+        "lab_id",
+        "origin",
+        "kit_id",
+        "pat_id",
+        "birthday",
+        "date_cellsearch",
+        "veridex_id",
+        "ctc_count",
+        "DEPArray_Pick_Date",
+        "cellisolation_method",
+        "DEPArray_count",
+        "isolated_wga",
+        "ctc_pool",
+        "isolated_wga_wbc",
+        "wbc_pool"
+      ]
+    },
+    {
+      "name": "Molecular Analysis",
+      "description": "The second worksheet called 'MolecularAnalysis'",
+      "name_internal": "MolecularAnalysis",
+      "destination": "z_plugin_d1_molecular",
+      "fields": [
+        "lab_id",
+        "pat_id",
+        "blood_withdrawal",
+        "date_cellsearch",
+        "DEPArray_Pick_Date",
+        "cell_id",
+        "gii",
+        "qpcr"
+      ]
+    }
+  ],
+  "mapping_table" : "z_plugin_d1_mapping"
+}

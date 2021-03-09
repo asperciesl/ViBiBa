@@ -151,6 +151,9 @@ $_LANG['sources_upload']['table_name_internal'] = 'table internal name';
 $_LANG['sources_upload']['allowed_columns'] = 'allowed columns';
 $_LANG['sources_upload']['table_preview_description'] = 'Preview of the uploaded data, only the first 20 entries are shown.';
 $_LANG['sources_upload']['disabled'] = 'The administrator has disabled the manual upload of data for this source. This may be to allow for automatic data import, which bypasses the upload form.';
+$_LANG['sources_upload']['plugin_processing'] = 'The plugin is processing the uploaded data. Please wait...';
+$_LANG['sources_upload']['plugin_success'] = 'The plugin successfully processed the uploaded data!';
+$_LANG['sources_upload']['plugin_failure'] = 'The plugin failed while processing the uploaded data! Please retry or contact an administrator.';
 
 
 /********************************************

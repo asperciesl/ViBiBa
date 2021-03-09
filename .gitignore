@@ -2,5 +2,5 @@ conf/config.php
 .idea/*
 public/vendor/*
 public/vendor
-public/plugins
+public/plugins/plugin_demo_4
 mysql_dump/

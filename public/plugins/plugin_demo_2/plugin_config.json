@@ -1,0 +1,26 @@
+{
+  "name": "Düsseldorf Import Plugin (cellcelector)",
+  "description": "maps and converts data from the cellcelector xlsx file from Düsseldorf",
+  "upload": [
+    {
+      "name": "Data Table",
+      "name_internal": "data",
+      "description": "",
+      "destination": "z_plugin_d2_data",
+      "fields": [
+        "number",
+        "Pat-ID",
+        "Kit-Nr",
+        "Project",
+        "Date_of_Isolation",
+        "User",
+        "Isolated_Cell_Count",
+        "how_many_time",
+        "Cluster",
+        "WBC",
+        "Comment"
+      ]
+    }
+  ],
+  "mapping_table" : "z_plugin_d2_mapping"
+}

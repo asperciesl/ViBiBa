@@ -231,6 +231,9 @@ if (!empty($_FOOTER)) {
                 require_once(__DIR__ . '/footer_presets/sample_table.php');
             } elseif ($entry['value'] == 'button_bar') {
                 require_once(__DIR__ . '/footer_presets/button_bar.php');
+            }elseif ($entry['value'] == 'callback') {
+                $_CALLBACK = $entry['args'];
+                require_once(__DIR__ . '/footer_presets/callback.php');
             }
         }
     }

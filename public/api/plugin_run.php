@@ -12,3 +12,18 @@ if(file_exists(__DIR__.'/../plugins/'.$source['plugin_name'].'/plugin.php')){
 
 $plugin_class = new vibiba_plugin($_SB);
 $response = $plugin_class->plugin_run($_GET['db_id'], $_GET['source_id'], $plugin);
+
+if($response == true){
+    ?>
+    <div class="alert alert-success">
+        <?= $_SB->language_output('plugin_success', "sources_upload") ?>
+    </div>
+    <?php
+}else{
+    ?>
+    <div class="alert alert-danger">
+        <?= $_SB->language_output('plugin_failure', "sources_upload") ?>
+    </div>
+    <?php
+}
+$response = '';
