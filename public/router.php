@@ -99,6 +99,8 @@ if ($uri[1] == 'app') {
         require_once(__DIR__ . "/api/button_basket.php");
     } elseif ($uri[2] == 'sampletable') {
         require_once(__DIR__ . "/api/sampletable.php");
+    } elseif ($uri[2] == 'sample_download') {
+        require_once(__DIR__ . "/api/sample_download.php");
     } elseif ($uri[2] == 'sampletable_load') {
         $_SITE['sample_table'] = $_GET;
         require_once(__DIR__ . '/app/template/sample_table.php');

@@ -11,7 +11,7 @@ $_FOOTER[] = array('type' => 'preset', 'value' => 'sample_table');
     </div>
     <div class="card-body">
         <p><?php echo($_SB->language_output('description_results', "sample_search")); ?></p>
-        <a class="btn btn-primary" href="/app/sample/search/download"
+        <a class="btn btn-primary" href="/api/sample_download/?search=1"
            target="_blank"><?php echo ucwords($_SB->language_output('download_excel', "ui")); ?></a>
         <a class="btn btn-primary"
            href="/app/sample/basket"><?php echo ucwords($_SB->language_output('sample_basket', "ui")); ?></a>
@@ -22,3 +22,7 @@ $_FOOTER[] = array('type' => 'preset', 'value' => 'sample_table');
         </div>
     </div>
 </div>
+<hr/>
+<?php
+require_once (__DIR__.'/sample_search_form.php');
+?>

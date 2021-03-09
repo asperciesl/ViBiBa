@@ -10,7 +10,7 @@ $_FOOTER[] = array('type' => 'preset', 'value' => 'button_bar');
         </div>
         <div class="card-body">
             <p><?= ($_SB->language_output('description', "sample_overview")) ?></p>
-            <a class="btn btn-primary" href="/app/sample/overview/download"
+            <a class="btn btn-primary" href="/api/sample_download/"
                target="_blank"><?= ucwords($_SB->language_output('download_excel', "ui")) ?></a>
             <a class="btn btn-primary"
                href="/app/sample/basket"><?= ucwords($_SB->language_output('sample_basket', "ui")) ?></a>
