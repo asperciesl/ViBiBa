@@ -3,4 +3,4 @@ conf/config.php
 public/vendor/*
 public/vendor
 public/plugins/plugin_demo_4
-mysql_dump/
+mysql_dump/sketch/
