@@ -1,5 +1,6 @@
 # ViBiBa Plugin
 To create a ViBiBa plugin simply create a new subfolder in /public/plugins/ with two files: 'plugin_config.json' and 'plugin.php'.
+The upload form will be generated using the plugin_config.json after successfully uploading new data, plugin.php will be automatically called.
 For more information please take a look at the demos.
 ## Example: plugin_config.json
 ````
