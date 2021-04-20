@@ -68,28 +68,58 @@ class vibiba_plugin extends vibiba_plugin_proto
         return NULL;
     }
 
+    function extract_kit_id($str, $tags){
+        foreach($tags as $needle => $tag){
+            $matches = array();
+            preg_match('/'.$needle.'/i', $str, $matches);
+            if(!empty($matches)){
+                $str = preg_replace('/'.$needle.'/i', '', $str);
+                preg_match('/[0-9]+/i', $str, $matches);
+                return array($matches[0], $tag);
+            }
+        }
+        return NULL;
+    }
+
     function plugin_run($db_id, $source_id, $args)
     {
         $data = array();
         $table_data = $this->mysql->real_escape_string($args['upload'][0]['destination']);
         $table_mapping = $this->mysql->real_escape_string($args['mapping_table']);
         $table_interface = $this->vibiba->mysql_table_name('source_interface', $db_id, $source_id);
-
+        $project_tags['DIII'] = 'DIII';
+        $project_tags['DIVa'] = 'DIV';
+        $project_tags['DIVb'] = 'DIVb';
+        $project_tags['DIV'] = 'DIV';
+        $project_tags['DV'] = 'DV';
+        $project_tags['DS'] = 'DS';
+        $project_tags['3D'] = 'DIII';
+        $project_tags['4Da'] = 'DIV';
+        $project_tags['4Db'] = 'DIVb';
+        $project_tags['4D'] = 'DIV';
+        $project_tags['5D'] = 'DV';
         $query = $this->mysql->query("Select * from " . $table_data);
         while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
-            $row['Kit-Nr'] = preg_split("/(,?\s+)|((?<=[a-z])(?=\d))|((?<=\d)(?=[a-z]))/i", $row['Pat-ID']);
-            if (empty($row['Kit-Nr'][2]) or !is_numeric($row['Kit-Nr'][2])) {
+            #$row['kit_id'] = preg_split("/(,?\s+)|((?<=[a-z])(?=\d))|((?<=\d)(?=[a-z]))/i", $row['Pat-ID']);
+            $kit_id = $this->extract_kit_id($row['Pat-ID'], $project_tags);
+
+            if(empty($kit_id)){
                 continue;
             }
-            $row['Kit-Nr'] = $row['Kit-Nr'][2];
-            $row['Pat-ID'] = Null;
+            $row['kit_id'] = $kit_id[0];
 
-            $row['Project'] = $this->adjust_trial_arm($row['Project'], $row['Kit-Nr']);
+            $row['Project'] = $this->adjust_trial_arm($row['Project'], $row['kit_id']);
             if (empty($row['Project'])) {
+                $row['Project'] = $this->adjust_trial_arm($kit_id[1], $row['kit_id']);
                 continue;
             }
-
+            if ($row['Project'] == "DV") {
+                $row['kit_id'] = $row['Project'] . "_" . sprintf("%06d", $row['kit_id']);
+            } else {
+                $row['kit_id'] = $row['Project'] . "_" . sprintf("%04d", $row['kit_id']);
+            }
             $row['Isolated_Cell_Count'] = $this->search_integer($row['Isolated_Cell_Count']);
+            $row['Pat-ID'] = Null;
             $row['how_many_time'] = $this->search_integer($row['how_many_time']);
             $row['Cluster'] = $this->search_integer($row['Cluster']);
             $row['WBC'] = $this->search_integer($row['WBC']);
@@ -110,12 +140,7 @@ class vibiba_plugin extends vibiba_plugin_proto
 
         foreach ($data as $row) {
             foreach ($mapping as $key => $value) {
-                if ($value['internal_field_mysql'] == 'kit_id') {
-                    $project = $row[$mapping_inv['project_id']['external_field_mysql']];
-                    $row_mapped[$value['internal_field_mysql']] = $project . '_' . $row[$value['external_field_mysql']];
-                } else {
-                    $row_mapped[$value['internal_field_mysql']] = $row[$value['external_field_mysql']];
-                }
+                $row_mapped[$value['internal_field_mysql']] = $row[$value['external_field_mysql']];
             }
             $row_mapped['ou_id'] = 1;
             $data_all[] = $row_mapped;

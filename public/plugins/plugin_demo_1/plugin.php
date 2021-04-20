@@ -60,16 +60,16 @@ class vibiba_plugin extends vibiba_plugin_proto
             if (is_numeric($row['kit_id'])) {
                 continue;
             }
-            if(!is_numeric($row['pat_id'])){
-                if(!is_numeric(explode('/',$row['pat_id'])[1])){
+            if (!is_numeric($row['pat_id'])) {
+                if (!is_numeric(explode('/', $row['pat_id'])[1])) {
                     continue;
                 }
-                $row['pat_id'] = explode('/',$row['pat_id'])[1];
+                $row['pat_id'] = explode('/', $row['pat_id'])[1];
             }
             $kit = array();
             #Separates kit ID from string
             preg_match('/\d+/', $row['kit_id'], $kit);
-            if(empty($kit[0])){
+            if (empty($kit[0])) {
                 continue;
             }
             $row['kit_id_real'] = $kit[0];
@@ -77,6 +77,7 @@ class vibiba_plugin extends vibiba_plugin_proto
             if (empty($row['project'])) {
                 continue;
             }
+            $row['kit_id_real'] = $row['project'] . '_' . $row['kit_id_real'];
             $row['date_cellsearch'] = $this->parse_date_safely($row['date_cellsearch']);
             $row['DEPArray_Pick_Date'] = $this->parse_date_safely($row['DEPArray_Pick_Date']);
 
@@ -119,13 +120,7 @@ class vibiba_plugin extends vibiba_plugin_proto
 
         foreach ($data as $row) {
             foreach ($mapping as $key => $value) {
-                #Checks if field is the kit_id and prepends the trial arm before the kit_id to harmonize the database
-                if ($value['internal_field_mysql'] == 'kit_id') {
-                    $project = $row[$mapping_inv['project_id']['external_field_mysql']];
-                    $row_mapped[$value['internal_field_mysql']] = $project . '_' . $row[$value['external_field_mysql']];
-                } else {
-                    $row_mapped[$value['internal_field_mysql']] = $row[$value['external_field_mysql']] ?? null;
-                }
+                $row_mapped[$value['internal_field_mysql']] = $row[$value['external_field_mysql']] ?? null;
             }
             #Always assigns ou_id = 2 (table lacks that information but all samples are from this specific ou)
             $row_mapped['ou_id'] = 2;
@@ -141,7 +136,7 @@ class vibiba_plugin extends vibiba_plugin_proto
         $query = 'TRUNCATE `' . $this->vibiba->mysql_table_name('source_interface', $db_id, $source_id) . '`';
         $this->mysql->query($query);
         if ($this->mysql_w->mysql_insert($data_all, $this->vibiba->mysql_table_name('source_interface', $db_id, $source_id), 'multiple')) {
-            $query = 'Update ' . $this->vibiba->mysql_table_name('source_config', $db_id) . ' set source_last_run = now() where source_id = '.$source_id;
+            $query = 'Update ' . $this->vibiba->mysql_table_name('source_config', $db_id) . ' set source_last_run = now() where source_id = ' . $source_id;
             $this->mysql->query($query);
             return true;
         } else {

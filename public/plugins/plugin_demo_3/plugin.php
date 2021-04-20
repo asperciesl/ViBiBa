@@ -81,6 +81,12 @@ class vibiba_plugin extends vibiba_plugin_proto
                 continue;
             }
             $row['Studie'] = $this->adjust_trial_arm($row['Studie'], $row['SampleID']);
+            #Detect5 uses a 6 number code while the rest uses 4 number codes
+            if ($row['Studie'] == "DV") {
+                $row['SampleID'] = $row['Studie'] . "_" . sprintf("%06d", $row['SampleID']);
+            } else {
+                $row['SampleID'] = $row['Studie'] . "_" . sprintf("%04d", $row['SampleID']);
+            }
 
             $date_Datum = date_parse_from_format("d.m.Y", $row['Datum']);
             $row['Datum'] = $date_Datum['year'] . "-" . $date_Datum['month'] . "-" . $date_Datum['day'];
@@ -109,12 +115,7 @@ class vibiba_plugin extends vibiba_plugin_proto
 
         foreach ($data as $row) {
             foreach ($mapping as $key => $value) {
-                if ($value['internal_field_mysql'] == 'kit_id') {
-                    $project = $row[$mapping_inv['project_id']['external_field_mysql']];
-                    $row_mapped[$value['internal_field_mysql']] = $project . '_' . $row[$value['external_field_mysql']];
-                } else {
-                    $row_mapped[$value['internal_field_mysql']] = $row[$value['external_field_mysql']];
-                }
+                $row_mapped[$value['internal_field_mysql']] = $row[$value['external_field_mysql']];
             }
             $row_mapped['ou_id'] = 1;
             if (!empty($row_mapped['kit_id']) and !empty($row_mapped['project_id'])) {
