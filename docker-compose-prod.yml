@@ -11,7 +11,7 @@ services:
     networks:
       - default
   composer:
-    build: ./docker_builds/www/
+    build: ./docker_builds/www_prod/
     volumes:
       - ./public:/var/www/html/
     command: composer install -d /var/www/html/
