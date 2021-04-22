@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  www:
+    build: ./docker_builds/www_prod/
+    ports:
+      - 80:80
+    volumes:
+      - ./public:/var/www/html/
+    links:
+      - db
+    networks:
+      - default
+  composer:
+    build: ./docker_builds/www/
+    volumes:
+      - ./public:/var/www/html/
+    command: composer install -d /var/www/html/
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_ROOT_PASSWORD: docker
+    volumes:
+      - ./mysql_dump/init.sql:/docker-entrypoint-initdb.d/setup2.sql
+      #- persistent:/var/lib/mysql
+    networks:
+      - default
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:db
+    ports:
+      - 8000:80
+    environment:
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_ROOT_PASSWORD: docker
+volumes:
+  persistent:
