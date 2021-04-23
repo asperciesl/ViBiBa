@@ -64,7 +64,7 @@ require_once(__DIR__ . '/../../lib/autoload.php');
             }
         }
         ?>
-        <?php if (empty($_CONFIG['jwt']['issuer']) or empty($_CONFIG['jwt']['aud']) or $_CONFIG['jwt']['logout'] != false){
+        <?php if (empty($_SB->config()['jwt']['issuer']) or empty($_SB->config()['jwt']['aud']) or $_SB->config()['jwt']['logout'] != false){
             ?>
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -198,7 +198,7 @@ require_once(__DIR__ . '/../../lib/autoload.php');
                 <button class="btn btn-secondary" type="button"
                         data-dismiss="modal"><?= ucwords($_SB->language_output('cancel', "ui")) ?></button>
                 <a class="btn btn-primary"
-                   href="<?= $_CONFIG['jwt']['logout'] ?? '/app/logout' ?>"><?= ucwords($_SB->language_output('logout', "ui")) ?></a>
+                   href="<?= $_SB->config()['jwt']['logout'] ?? '/app/logout' ?>"><?= ucwords($_SB->language_output('logout', "ui")) ?></a>
             </div>
         </div>
     </div>
