@@ -79,7 +79,7 @@ use Auth0\SDK\Helpers\Tokens\AsymmetricVerifier;
 use Auth0\SDK\Helpers\Tokens\IdTokenVerifier;
 use CoderCat\JWKToPEM\JWKConverter;
 
-if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud'])) {
+if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud']) and $_SB->user->user_current() == false) {
     $issuer = $_CONFIG['jwt']['issuer'];
     $aud = $_CONFIG['jwt']['aud'];
 
@@ -103,14 +103,16 @@ if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud'])) {
         return [$key_id => $key];
     }
 
-    if (!empty((empty($cfAuth)))) {
+    if (!empty($cfAuth)) {
         try {
             $id_token = rawurldecode($cfAuth);
             $key = getKey($_CONFIG['jwt']['url']);
             $signature_verifier = new AsymmetricVerifier($key);
             $token_verifier = new IdTokenVerifier($issuer, $aud, $signature_verifier);
             $user_identity = $token_verifier->verify($id_token);
-            var_dump($user_identity);
+            if(!empty($user_identity['email'])){
+                $_SB->user->user_login($user_identity['email'], NULL, );
+            }
         } catch (\Exception $e) {
         }
     }
