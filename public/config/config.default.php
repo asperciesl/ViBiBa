@@ -54,3 +54,5 @@ $_CONFIG['debug'] = false;
 $_CONFIG['jwt']['issuer'] = '';
 $_CONFIG['jwt']['aud'] = '';
 $_CONFIG['jwt']['url'] = '';
+
+$_CONFIG['jwt']['logout'] = ''; #false if logout should be disabled otherwise url to terminate jwt session
