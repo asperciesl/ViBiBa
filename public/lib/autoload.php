@@ -115,6 +115,8 @@ if ($_SB->user->user_current() == false) {
     }
 } elseif ($_SB->db_current() == false and $_SERVER['REQUEST_URI'] != '/app/databases') {
     $_SB->redirect('database_select');
+} elseif ($_SERVER['REQUEST_URI'] == '/app/login') {
+    $_SB->redirect('index');
 }
 
 
