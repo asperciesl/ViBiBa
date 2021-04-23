@@ -64,7 +64,7 @@ require_once(__DIR__ . '/../../lib/autoload.php');
             }
         }
         ?>
-        <?php if (empty($_SB->config()['jwt']['logout']) or $_SB->config()['jwt']['logout'] != false) {
+        <?php if (empty($_SB->config()['jwt']['logout']) or $_SB->config()['jwt']['logout'] != 'disable') {
             ?>
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -126,7 +126,7 @@ require_once(__DIR__ . '/../../lib/autoload.php');
                                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Activity Log
                             </a>
-                            <?php if (empty($_SB->config()['jwt']['logout']) or $_SB->config()['jwt']['logout'] != false) {
+                            <?php if (empty($_SB->config()['jwt']['logout']) or $_SB->config()['jwt']['logout'] != 'disable') {
                                 ?>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
