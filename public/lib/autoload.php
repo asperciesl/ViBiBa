@@ -48,7 +48,7 @@ if (empty($_SESSION['debug']) and $_CONFIG['maintenance']) {
 } else {
     $maintenance = false;
 }
-unset($_CONFIG);
+
 
 /*****************************
  **** Automatic Redirect *****
@@ -71,4 +71,49 @@ if ($_SB->user->user_current() == false) {
     $_SB->redirect('database_select');
 }
 
+/*****************************
+ **** JWT Automatic Login ****
+ *****************************/
 
+use Auth0\SDK\Helpers\Tokens\AsymmetricVerifier;
+use Auth0\SDK\Helpers\Tokens\IdTokenVerifier;
+use CoderCat\JWKToPEM\JWKConverter;
+
+if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud'])) {
+    $issuer = $_CONFIG['jwt']['issuer'];
+    $aud = $_CONFIG['jwt']['aud'];
+
+    $cfAuth = $_COOKIE['CF_Authorization'] ?? '';
+
+    function getKey($jwksUrl)
+    {
+        $client = new GuzzleHttp\Client();
+        $res = $client->request('GET', $jwksUrl);
+
+        if ($res->getStatusCode() != '200') {
+            throw new \Exception('Could not fetch JWKS');
+        }
+
+        $json = $res->getBody();
+        $jwks = json_decode($json);
+        $key_id = $jwks->keys[0]->kid;
+
+        $jwkConverter = new JWKConverter();
+        $key = $jwkConverter->toPEM((array)$jwks->keys[0]);
+        return [$key_id => $key];
+    }
+
+    if (!empty((empty($cfAuth)))) {
+        try {
+            $id_token = rawurldecode($cfAuth);
+            $key = getKey($_CONFIG['jwt']['url']);
+            $signature_verifier = new AsymmetricVerifier($key);
+            $token_verifier = new IdTokenVerifier($issuer, $aud, $signature_verifier);
+            $user_identity = $token_verifier->verify($id_token);
+            var_dump($user_identity);
+        } catch (\Exception $e) {
+        }
+    }
+}
+
+unset($_CONFIG);

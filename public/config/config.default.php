@@ -50,3 +50,7 @@ $_CONFIG['ui']['sample_table']['heading_class'][] = '';
 
 $_CONFIG['maintenance'] = false;
 $_CONFIG['debug'] = false;
+
+$_CONFIG['jwt']['issuer'] = '';
+$_CONFIG['jwt']['aud'] = '';
+$_CONFIG['jwt']['url'] = '';
