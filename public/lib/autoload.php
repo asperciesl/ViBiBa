@@ -111,7 +111,7 @@ if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud']) and $_S
             $token_verifier = new IdTokenVerifier($issuer, $aud, $signature_verifier);
             $user_identity = $token_verifier->verify($id_token);
             if(!empty($user_identity['email'])){
-                $_SB->user->user_login($user_identity['email'], NULL, );
+                $_SB->user->user_login($user_identity['email'], NULL, 'force');
             }
         } catch (\Exception $e) {
         }
