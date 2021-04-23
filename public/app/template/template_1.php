@@ -64,7 +64,7 @@ require_once(__DIR__ . '/../../lib/autoload.php');
             }
         }
         ?>
-        <?php if (empty($_SB->config()['jwt']) or $_SB->config()['jwt']['logout'] != false){
+        <?php if ($_SB->config()['jwt']['logout'] != false){
             ?>
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
