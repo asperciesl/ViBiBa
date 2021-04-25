@@ -1,5 +1,5 @@
 <?php
-$_CONFIG['version'] = "0.9";
+$_CONFIG['version'] = "0.9.1";
 gc_collect_cycles();
 if (file_exists(__DIR__ . '/../config/config.php')) {
     require_once(__DIR__ . '/../config/config.php');

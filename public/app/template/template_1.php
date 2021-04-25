@@ -114,6 +114,8 @@ require_once(__DIR__ . '/../../lib/autoload.php');
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
+                            <?php
+                            /*
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
@@ -121,10 +123,10 @@ require_once(__DIR__ . '/../../lib/autoload.php');
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Settings
-                            </a>
-                            <a class="dropdown-item" href="#">
+                            </a> */ ?>
+                            <a class="dropdown-item" href="/app/contact">
                                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
+                                Contact
                             </a>
                             <?php if (empty($_SB->config()['jwt']['logout']) or $_SB->config()['jwt']['logout'] != 'disable') {
                                 ?>
@@ -246,6 +248,23 @@ if (!empty($_FOOTER)) {
             }
         }
     }
+}
+?>
+<?php
+if(empty($_SESSION['welcome_shown']) and (file_exists(__DIR__.'/welcome_modal.php') or file_exists(__DIR__.'/welcome_modal_custom.php'))){
+    $_SESSION['welcome_shown'] = true;
+    if(file_exists(__DIR__.'/welcome_modal_custom.php')){
+        require_once (__DIR__.'/welcome_modal_custom.php');
+    }else{
+        require_once (__DIR__.'/welcome_modal.php');
+    }
+    ?>
+    <script>
+        $(document).ready(function () {
+            $('#welcomeModal').modal('show')
+        });
+    </script>
+    <?php
 }
 ?>
 </body>

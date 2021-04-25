@@ -46,8 +46,12 @@
 <!-- Custom scripts for all pages-->
 <script src="/assets/sbadmin2/js/sb-admin-2.min.js"></script>
 <?php
-if(file_exists(__DIR__.'/welcome_modal.php') and $_SERVER['REQUEST_URI'] == '/app/login' and empty($_POST)){
-    require_once (__DIR__.'/welcome_modal.php');
+if((file_exists(__DIR__.'/welcome_modal.php') or file_exists(__DIR__.'/welcome_modal_custom.php')) and $_SERVER['REQUEST_URI'] == '/app/login' and empty($_POST)){
+    if(file_exists(__DIR__.'/welcome_modal_custom.php')){
+        require_once (__DIR__.'/welcome_modal_custom.php');
+    }else{
+        require_once (__DIR__.'/welcome_modal.php');
+    }
     ?>
     <script>
         $(document).ready(function () {

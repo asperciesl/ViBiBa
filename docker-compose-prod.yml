@@ -10,6 +10,7 @@ services:
       - db
     networks:
       - default
+    restart: always
   composer:
     build: ./docker_builds/www_prod/
     volumes:
@@ -27,9 +28,10 @@ services:
       MYSQL_ROOT_PASSWORD: docker
     volumes:
       - ./mysql_dump/init.sql:/docker-entrypoint-initdb.d/setup2.sql
-      #- persistent:/var/lib/mysql
+      - persistent:/var/lib/mysql
     networks:
       - default
+    restart: always
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
@@ -40,5 +42,6 @@ services:
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       MYSQL_ROOT_PASSWORD: docker
+    restart: always
 volumes:
   persistent:
