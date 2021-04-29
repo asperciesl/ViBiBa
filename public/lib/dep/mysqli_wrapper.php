@@ -103,6 +103,7 @@ class mysqli_wrapper
             }
         } else {
             trigger_error($this->mysql->error, E_USER_WARNING);
+            trigger_error($query, E_USER_WARNING);
             return false;
         }
     }
