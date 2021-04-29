@@ -948,13 +948,13 @@ ADD CONSTRAINT `" . $table . "_field_id` FOREIGN KEY (`field_id`) REFERENCES `" 
         }
 
 #d($data_uncompressed, "data passed to mysql_func");
-        $table = $this->mysql_table_name('samples');
+        $table = $this->mysql_table_name('samples', $db_id);
         $query = "TRUNCATE `$table`";
         $this->mysql->query($query);
         $this->mysql_w->mysql_insert($data_uncompressed, $table, 'multiple');
 
 #d($data, "data passed to mysql_func");
-        $table = $this->mysql_table_name('cache');
+        $table = $this->mysql_table_name('cache', $db_id);
         $query = "TRUNCATE `$table`";
         $this->mysql->query($query);
         if ($this->mysql_w->mysql_insert($data, $table, 'multiple') !== false) {
