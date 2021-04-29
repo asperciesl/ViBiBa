@@ -7,10 +7,19 @@ class mysqli_wrapper
      */
     protected $mysql;
 
+    /**
+     * @var boolean Debug Mode
+     */
+    protected $debug = false;
+
     function __construct($config)
     {
         $this->mysql = new mysqli($config['host'], $config['user'], $config['password'], $config['db']);
         $this->mysql->query("SET NAMES 'utf8'");
+
+        if(!empty($config['debug']) and $config['debug'] == true){
+            $this->debug = true;
+        }
     }
 
 
@@ -103,7 +112,9 @@ class mysqli_wrapper
             }
         } else {
             trigger_error($this->mysql->error, E_USER_WARNING);
-            trigger_error($query, E_USER_WARNING);
+            if($this->debug){
+                trigger_error($query, E_USER_WARNING);
+            }
             return false;
         }
     }
