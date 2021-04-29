@@ -42,6 +42,7 @@ services:
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       MYSQL_ROOT_PASSWORD: docker
+      UPLOAD_LIMIT: 300M
     restart: always
 volumes:
   persistent:
