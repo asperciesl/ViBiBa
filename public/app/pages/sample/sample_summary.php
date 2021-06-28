@@ -31,10 +31,11 @@ $ous = $_SB->user->ou_fetch();
             </thead>
             <tbody>
             <?php foreach ($summary as $category => $types) {
+                if($category == 'ou_id'){
+                    #$type = $ous[$type]['ou_short'];
+                    continue;
+                }
                 foreach ($types as $type => $values) {
-                    if($category == 'ou_id'){
-                        $type = $ous[$type]['ou_short'];
-                    }
 
                     if ($category == 'all'){
                         $category_name = 'all';
