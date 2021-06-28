@@ -253,7 +253,7 @@ if (!empty($_FOOTER)) {
 }
 ?>
 <?php
-if(empty($_SESSION['welcome_shown']) and (file_exists(__DIR__.'/welcome_modal.php') or file_exists(__DIR__.'/welcome_modal_custom.php'))){
+if(empty($_SESSION['welcome_shown']) and (file_exists(__DIR__.'/welcome_modal.php') or file_exists(__DIR__.'/welcome_modal_custom.php')) and (empty($_SB->config()['welcome_modal_disable']) or $_SB->config()['welcome_modal_disable'] != true)){
     $_SESSION['welcome_shown'] = true;
     if(file_exists(__DIR__.'/welcome_modal_custom.php')){
         require_once (__DIR__.'/welcome_modal_custom.php');
