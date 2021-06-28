@@ -19,6 +19,7 @@ $_LANG['ui']['error'] = 'Fehler';
 $_LANG['ui']['ou'] = 'Labore';
 $_LANG['ui']['sample_overview'] = 'Übersicht';
 $_LANG['ui']['sample_search'] = 'Suche';
+$_LANG['ui']['sample_summary'] = 'Zusammenfassung';
 $_LANG['ui']['sample_basket'] = 'Merkliste';
 $_LANG['ui']['sample_orders'] = 'Bestellungen';
 $_LANG['ui']['sources_overview'] = 'Quellen';
@@ -99,6 +100,13 @@ $_LANG['sample_search']['heading_results'] = 'Suchergebnis';
 $_LANG['sample_search']['heading_search_form'] = 'Proben Suche';
 $_LANG['sample_search']['description_results'] = '';
 $_LANG['sample_search']['description_search_form'] = '';
+
+/********************************************
+ ************ UI/Sample_summary ************
+ ********************************************/
+
+$_LANG['sample_summary']['heading'] = 'Proben Zusammenfassung';
+$_LANG['sample_summary']['description'] = '';
 
 /********************************************
  ************ UI/Sample_Basket **************

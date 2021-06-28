@@ -10,6 +10,7 @@ $_APP['site_structure'] = array(
     'databases' => array('call' => __DIR__ . '/../app/pages/user/database_select.php', 'template' => 2),
     'languages' => array('call' => __DIR__ . '/../app/pages/user/lang_select.php', 'template' => 2),
     'sample/overview' => array('call' => __DIR__ . '/../app/pages/sample/sample_overview.php', 'template' => 1),
+    'sample/summary' => array('call' => __DIR__ . '/../app/pages/sample/sample_summary.php', 'template' => 1),
     'sample/basket' => array('call' => __DIR__ . '/../app/pages/sample/sample_basket.php', 'template' => 1),
     'sample/orders' => array('call' => __DIR__ . '/../app/pages/sample/sample_orders.php', 'template' => 1),
     '#sample/orders/([A-Za-z0-9-_]+)/?#' => array('call' => __DIR__ . '/../app/pages/sample/sample_orders.php', 'template' => 1),
@@ -50,7 +51,8 @@ $_APP['navigation'] = array(
         'entries' =>
             array(
                 array('name' => ucwords($_SB->language_output('sample_overview', 'ui')), 'uri' => '/app/sample/overview', 'icon' => 'fas fa-table'),
-                array('name' => ucwords($_SB->language_output('sample_search', 'ui')), 'uri' => '/app/sample/search', 'icon' => 'fas fa-search')
+                array('name' => ucwords($_SB->language_output('sample_search', 'ui')), 'uri' => '/app/sample/search', 'icon' => 'fas fa-search'),
+                array('name' => ucwords($_SB->language_output('sample_summary', 'ui')), 'uri' => '/app/sample/summary', 'icon' => 'fas fa-envelope'),
             )
     ),
     array(

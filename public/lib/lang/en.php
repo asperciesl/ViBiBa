@@ -19,6 +19,7 @@ $_LANG['ui']['error'] = 'error';
 $_LANG['ui']['ou'] = 'labs';
 $_LANG['ui']['sample_overview'] = 'overview';
 $_LANG['ui']['sample_search'] = 'search';
+$_LANG['ui']['sample_summary'] = 'summary';
 $_LANG['ui']['sample_basket'] = 'basket';
 $_LANG['ui']['sample_orders'] = 'orders';
 $_LANG['ui']['sources_overview'] = 'sources';
@@ -99,6 +100,13 @@ $_LANG['sample_search']['heading_results'] = 'sample search results';
 $_LANG['sample_search']['heading_search_form'] = 'sample search';
 $_LANG['sample_search']['description_results'] = '';
 $_LANG['sample_search']['description_search_form'] = '';
+
+/********************************************
+ ************ UI/Sample_summary ************
+ ********************************************/
+
+$_LANG['sample_summary']['heading'] = 'sample summary';
+$_LANG['sample_summary']['description'] = '';
 
 /********************************************
  ************ UI/Sample_Basket **************

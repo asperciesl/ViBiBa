@@ -73,7 +73,7 @@ require_once(__DIR__ . '/../../lib/autoload.php');
                     <i class="fas fa-sign-out-alt"></i>
                     <span><?= ucwords($_SB->language_output('logout', "ui")) ?></span></a>
             </li>
-            <?
+            <?php
         } ?>
 
         <!-- Divider -->

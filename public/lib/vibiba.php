@@ -1867,6 +1867,58 @@ FROM   `$table` " .
     }
 
     /*****************************************
+     ***** Database/Samples/Summary ***********
+     *****************************************/
+
+    /**
+     * Wrapper for summary of all samples in current db
+     * @param integer $db_id Database ID
+     * @return array
+     */
+    function db_samples_summary()
+    {
+        $db_id = $this->db_current()['db_id'];
+        $raw = $this->db_samples_summary_core($db_id);
+        return $raw;
+    }
+    /**
+     * Creates summary of all samples per category
+     * @param integer $db_id Database ID
+     * @return array
+     */
+    function db_samples_summary_core($db_id)
+    {
+        $table = $this->mysql_table_name("samples", $db_id);
+        $fields = $this->db_fields_fetch();
+        $fields_keys = array_merge($fields['field_type']['7'], $fields['field_type']['8']);
+        $fields_keys = $this->pluck($fields_keys, 'field_name_internal');
+        $fields_keys = $this->mysql_real_escape_array($fields_keys);
+        $fields_values = $this->pluck($fields['field_type']['2'], 'field_name_internal');
+        $fields_values = $this->mysql_real_escape_array($fields_values);
+
+
+        $query_sums = 'sum(`' . implode('`), sum(`', $fields_values) . '`)';
+        $output = array();
+        foreach($fields_keys as $key){
+            if($key == 'pat_id'){
+                continue;
+            }
+            $query = "Select `$key`, $query_sums from $table group by $key";
+            $query = $this->mysql->query($query);
+            while($row = $query->fetch_array(MYSQLI_ASSOC)){
+                foreach($row as $row_key => $row_value){
+                    if ($row_key == $key){
+                        continue;
+                    }
+                    $row_key = substr($row_key, 5, -2);
+                    $output[$key][$row[$key]][$row_key] = $row_value;
+                }
+            }
+        }
+        return $output;
+    }
+
+    /*****************************************
      ***** Database/Samples/Basket ***********
      *****************************************/
 
@@ -2119,6 +2171,14 @@ FROM   `$table` " .
     function mysql_w()
     {
         return $this->mysql_w;
+    }
+
+    function mysql_real_escape_array($input)
+    {
+        foreach($input as $key => $value){
+            $input[$key] = $this->mysql->real_escape_string($value);
+        }
+        return $input;
     }
 
     /**
