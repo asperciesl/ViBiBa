@@ -1889,7 +1889,7 @@ FROM   `$table` " .
      */
     function db_samples_summary_core($db_id)
     {
-        $table = $this->mysql_table_name("samples", $db_id);
+        $table = $this->mysql_table_name("cache", $db_id);
         $fields = $this->db_fields_fetch();
         $fields_keys = array_merge($fields['field_type']['7'], $fields['field_type']['8']);
         $fields_keys = $this->pluck($fields_keys, 'field_name_internal');
