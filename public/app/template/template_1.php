@@ -33,7 +33,9 @@ require_once(__DIR__ . '/../../lib/autoload.php');
             </div>
             <div class="sidebar-brand-text mx-3">ViBiBa <sup><?= $_SB->config()['version'] ?></sup></div>
         </a>
-
+        <div class="sidebar-heading">
+        <?= $_SB->db_current()['db_name_'.$_SB->lang()] ?>
+        </div>
         <?php
         if (!empty($_APP)) {
             foreach ($_APP['navigation'] as $heading) {
