@@ -16,7 +16,7 @@ $ous = $_SB->user->ou_fetch();
             <tr>
                 <th>Category</th>
                 <th>Type</th>
-                <th>Count</th>
+                <th>Sample Count</th>
                 <?php
                 $first_line = $summary[array_key_first($summary)];
                 $first_line = $first_line[array_key_first($first_line)];
