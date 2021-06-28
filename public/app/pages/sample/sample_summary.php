@@ -16,12 +16,14 @@ $ous = $_SB->user->ou_fetch();
             <tr>
                 <th>Category</th>
                 <th>Type</th>
+                <td>Count</td>
                 <?php
                 $first_line = $summary[array_key_first($summary)];
                 $first_line = $first_line[array_key_first($first_line)];
                 foreach ($first_line as $key => $value) {
-                    $x = $fields['flat_by_name'][$key];
-                    $y = 'field_name_' . $_SB->lang();
+                    if($key == 'count'){
+                        continue;
+                    }
                     echo '<th>' . $fields['flat_by_name'][$key]['field_name_' . $_SB->lang()] . '</th>';
                 }
                 ?>
@@ -33,14 +35,26 @@ $ous = $_SB->user->ou_fetch();
                     if($category == 'ou_id'){
                         $type = $ous[$type]['ou_short'];
                     }
+
+                    if ($category == 'all'){
+                        $category_name = 'all';
+                    }else{
+                        $category_name = $fields['flat_by_name'][$category]['field_name_' . $_SB->lang()];
+                    }
+
                     ?>
                     <tr>
-                        <th><?= $category ?></th>
+                        <th><?= $category_name; ?></th>
                         <th><?= $type ?></th>
                         <td><?= implode('</td><td>', $values) ?></>
                     </tr>
                     <?php
                 }
+                ?>
+                <tr>
+                    <td colspan="<?= 2+count($values) ?>"></td>
+                </tr>
+                <?php
             } ?>
             </tbody>
         </table>

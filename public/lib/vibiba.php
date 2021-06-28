@@ -1881,6 +1881,7 @@ FROM   `$table` " .
         $raw = $this->db_samples_summary_core($db_id);
         return $raw;
     }
+
     /**
      * Creates summary of all samples per category
      * @param integer $db_id Database ID
@@ -1893,21 +1894,30 @@ FROM   `$table` " .
         $fields_keys = array_merge($fields['field_type']['7'], $fields['field_type']['8']);
         $fields_keys = $this->pluck($fields_keys, 'field_name_internal');
         $fields_keys = $this->mysql_real_escape_array($fields_keys);
+        $fields_keys[] = 'all';
         $fields_values = $this->pluck($fields['field_type']['2'], 'field_name_internal');
         $fields_values = $this->mysql_real_escape_array($fields_values);
 
 
         $query_sums = 'sum(`' . implode('`), sum(`', $fields_values) . '`)';
         $output = array();
-        foreach($fields_keys as $key){
-            if($key == 'pat_id'){
+        foreach ($fields_keys as $key) {
+            if ($key == 'pat_id') {
                 continue;
             }
-            $query = "Select `$key`, $query_sums from $table group by $key";
+            if($key == 'all'){
+                $query = "Select count(*), $query_sums from $table";
+            }else{
+                $query = "Select count(*), `$key`, $query_sums from $table group by $key";
+            }
+
             $query = $this->mysql->query($query);
-            while($row = $query->fetch_array(MYSQLI_ASSOC)){
-                foreach($row as $row_key => $row_value){
-                    if ($row_key == $key){
+            while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
+                foreach ($row as $row_key => $row_value) {
+                    if ($row_key == $key) {
+                        continue;
+                    } elseif ($row_key == 'count(*)') {
+                        $output[$key][$row[$key]]['count'] = $row_value;
                         continue;
                     }
                     $row_key = substr($row_key, 5, -2);
@@ -2175,7 +2185,7 @@ FROM   `$table` " .
 
     function mysql_real_escape_array($input)
     {
-        foreach($input as $key => $value){
+        foreach ($input as $key => $value) {
             $input[$key] = $this->mysql->real_escape_string($value);
         }
         return $input;
