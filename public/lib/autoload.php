@@ -63,7 +63,7 @@ if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud']) and $_S
 
     $cfAuth = $_COOKIE['CF_Authorization'] ?? '';
 
-    function getKey($jwksUrl)
+    function getKeys($jwksUrl)
     {
         $client = new GuzzleHttp\Client();
         $res = $client->request('GET', $jwksUrl);
@@ -74,17 +74,20 @@ if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud']) and $_S
 
         $json = $res->getBody();
         $jwks = json_decode($json);
-        $key_id = $jwks->keys[1]->kid;
-
-        $jwkConverter = new JWKConverter();
-        $key = $jwkConverter->toPEM((array)$jwks->keys[1]);
-        return [$key_id => $key];
+        $n = 0;
+        while(!empty($jwks->keys[$n])){
+            $key_id = $jwks->keys[$n]->kid;
+            $jwkConverter = new JWKConverter();
+            $key = $jwkConverter->toPEM((array)$jwks->keys[$n]);
+            $return [$key_id]  = $key;
+        }
+        return $return;
     }
 
     if (!empty($cfAuth)) {
         try {
             $id_token = rawurldecode($cfAuth);
-            $key = getKey($_CONFIG['jwt']['url']);
+            $key = getKeys($_CONFIG['jwt']['url']);
             $signature_verifier = new AsymmetricVerifier($key);
             $token_verifier = new IdTokenVerifier($issuer, $aud, $signature_verifier);
             $user_identity = $token_verifier->verify($id_token);

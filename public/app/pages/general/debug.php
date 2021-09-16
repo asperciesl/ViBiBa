@@ -43,7 +43,7 @@ use CoderCat\JWKToPEM\JWKConverter;
                                                     <h3>$id_token</h3>
                                                     <pre><?php print_r($id_token);?></pre>
                                                     <?php
-                                                    $key = getKey($_CONFIG['jwt']['url']);
+                                                    $key = getKeys($_CONFIG['jwt']['url']);
                                                     ?>
                                                     <h3>$key</h3>
                                                     <pre><?php var_dump($key);?></pre>
