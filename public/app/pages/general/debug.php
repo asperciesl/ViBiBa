@@ -39,7 +39,7 @@ use Firebase\JWT\JWT;
                                                     $jwt = rawurldecode($cfAuth);
                                                     ?>
                                                     <h3>$jwt</h3>
-                                                    <pre><?php var_dump($jwt);?></pre>
+                                                    <pre><?php print_r($jwt);?></pre>
                                                     <?php
                                                     $publicKey = getKey($_CONFIG['jwt']['url']);?>
                                                     <h3>$publicKey</h3>
