@@ -25,7 +25,7 @@ use CoderCat\JWKToPEM\JWKConverter;
                                         <pre><?php var_dump($_SESSION);?></pre>
                                         <h2>$_COOKIE</h2>
                                         <pre><?php var_dump($_COOKIE);?></pre>
-                                        <h2>JWt</h2>
+                                        <h2>JWT</h2>
                                         <?php
 
                                         if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud']) and $_SB->user->user_current() == false) {
@@ -59,6 +59,10 @@ use CoderCat\JWKToPEM\JWKConverter;
                                                     $signature_verifier = new AsymmetricVerifier($key);
                                                     $token_verifier = new IdTokenVerifier($issuer, $aud, $signature_verifier);
                                                     $user_identity = $token_verifier->verify($id_token);
+                                                    ?>
+                                                    <h3>$user_identity</h3>
+                                                    <pre><?php var_dump($user_identity);?></pre>
+                                                    <?php
                                                     if(!empty($user_identity['email'])){
                                                         $_SB->user->user_login($user_identity['email'], NULL, 'force');
                                                     }
