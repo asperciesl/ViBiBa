@@ -80,6 +80,7 @@ if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud']) and $_S
             $jwkConverter = new JWKConverter();
             $key = $jwkConverter->toPEM((array)$jwks->keys[$n]);
             $return [$key_id]  = $key;
+            $n++;
         }
         return $return;
     }
