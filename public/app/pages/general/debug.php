@@ -1,5 +1,7 @@
 <?php
-use Firebase\JWT\JWT;
+use Auth0\SDK\Helpers\Tokens\AsymmetricVerifier;
+use Auth0\SDK\Helpers\Tokens\IdTokenVerifier;
+use CoderCat\JWKToPEM\JWKConverter;
 ?>
 <div class="row justify-content-center">
     <div class="col-xl-10 col-lg-12 col-md-9">
@@ -38,19 +40,29 @@ use Firebase\JWT\JWT;
                                                 try {
                                                     $jwt = rawurldecode($cfAuth);
                                                     ?>
-                                                    <h3>$jwt</h3>
-                                                    <pre><?php print_r($jwt);?></pre>
+                                                    <h3>$id_token</h3>
+                                                    <pre><?php print_r($id_token);?></pre>
                                                     <?php
-                                                    $publicKey = getKey($_CONFIG['jwt']['url']);?>
-                                                    <h3>$publicKey</h3>
-                                                    <pre><?php var_dump($publicKey);?></pre>
-                                                    <?php
-                                                    $decoded = JWT::decode($jwt, $publicKey, array('RS256'));
+                                                    $key = getKey($_CONFIG['jwt']['url']);
                                                     ?>
-                                                    <h3>$decoded</h3>
-                                                    <pre><?php var_dump((array) $decoded);?></pre>
+                                                    <h3>$key</h3>
+                                                    <pre><?php var_dump($key);?></pre>
                                                     <?php
-                                                    $decoded_array = (array) $decoded;
+                                                    $signature_verifier = new AsymmetricVerifier($key);
+                                                    ?>
+                                                    <h3>$signature_verifier</h3>
+                                                    <pre><?php var_dump($signature_verifier);?></pre>
+                                                    <?php
+                                                    $token_verifier = new IdTokenVerifier($issuer, $aud, $signature_verifier);
+                                                    ?>
+                                                    <h3>$token_verifier</h3>
+                                                    <pre><?php var_dump($token_verifier);?></pre>
+                                                    <?php
+                                                    $user_identity = $token_verifier->verify($id_token);
+                                                    ?>
+                                                    <h3>$user_identity</h3>
+                                                    <pre><?php var_dump($user_identity);?></pre>
+                                                    <?php
                                                     if(!empty($user_identity['email'])){
                                                         $_SB->user->user_login($user_identity['email'], NULL, 'force');
                                                     }
