@@ -57,9 +57,25 @@ use CoderCat\JWKToPEM\JWKConverter;
                                             if (!empty($cfAuth)) {
                                                 try {
                                                     $id_token = rawurldecode($cfAuth);
+                                                    ?>
+                                                    <h3>$id_token</h3>
+                                                    <pre><?php var_dump($id_token);?></pre>
+                                                    <?php
                                                     $key = getKey($_CONFIG['jwt']['url']);
+                                                    ?>
+                                                    <h3>$key</h3>
+                                                    <pre><?php var_dump($key);?></pre>
+                                                    <?php
                                                     $signature_verifier = new AsymmetricVerifier($key);
+                                                    ?>
+                                                    <h3>$signature_verifier</h3>
+                                                    <pre><?php var_dump($signature_verifier);?></pre>
+                                                    <?php
                                                     $token_verifier = new IdTokenVerifier($issuer, $aud, $signature_verifier);
+                                                    ?>
+                                                    <h3>$token_verifier</h3>
+                                                    <pre><?php var_dump($token_verifier);?></pre>
+                                                    <?php
                                                     $user_identity = $token_verifier->verify($id_token);
                                                     ?>
                                                     <h3>$user_identity</h3>
