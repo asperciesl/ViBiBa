@@ -25,10 +25,12 @@ use CoderCat\JWKToPEM\JWKConverter;
                                         <pre><?php var_dump($_SESSION);?></pre>
                                         <h2>$_COOKIE</h2>
                                         <pre><?php var_dump($_COOKIE);?></pre>
-                                        <h2>JWT</h2>
                                         <?php
 
-                                        if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud']) and $_SB->user->user_current() == false) {
+                                        if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud'])) {
+                                            ?>
+                                            <h2>JWT</h2>
+                                            <?php
                                             $issuer = $_CONFIG['jwt']['issuer'];
                                             $aud = $_CONFIG['jwt']['aud'];
 
