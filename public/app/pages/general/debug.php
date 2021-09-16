@@ -41,7 +41,10 @@ use Firebase\JWT\JWT;
                                                     <h3>$jwt</h3>
                                                     <pre><?php var_dump($jwt);?></pre>
                                                     <?php
-                                                    $publicKey = getKey($_CONFIG['jwt']['url']);
+                                                    $publicKey = getKey($_CONFIG['jwt']['url']);?>
+                                                    <h3>$publicKey</h3>
+                                                    <pre><?php var_dump($publicKey);?></pre>
+                                                    <?php
                                                     $decoded = JWT::decode($jwt, $publicKey, array('RS256'));
                                                     ?>
                                                     <h3>$decoded</h3>
