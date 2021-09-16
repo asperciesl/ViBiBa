@@ -74,7 +74,7 @@ if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud']) and $_S
 
         $json = $res->getBody();
         $jwks = json_decode($json);
-        $key_id = $jwks->keys[0]->kid;
+        $key_id = $jwks->keys[1]->kid;
 
         $jwkConverter = new JWKConverter();
         $key = $jwkConverter->toPEM((array)$jwks->keys[0]);
