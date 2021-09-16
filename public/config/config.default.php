@@ -50,6 +50,7 @@ $_CONFIG['ui']['sample_table']['heading_class'][] = '';
 
 $_CONFIG['maintenance'] = false;
 $_CONFIG['debug'] = false;
+$_CONFIG['debug_info'] = false;
 #$_CONFIG['welcome_modal_disable'] = true;
 
 $_CONFIG['jwt']['issuer'] = '';

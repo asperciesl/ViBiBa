@@ -1,6 +1,7 @@
 <?php
 $_APP['site_structure'] = array(
     'maintenance' => array('call' => __DIR__ . '/../app/pages/general/maintenance.php', 'template' => 2),
+    'debug' => array('call' => __DIR__ . '/../app/pages/general/debug.php', 'template' => 2),
     'dashboard' => array('call' => __DIR__ . '/../app/pages/general/dashboard.php', 'template' => 1),
     'login' => array('call' => __DIR__ . '/../app/pages/user/login.php', 'template' => 2),
     'logout' => array('call' => 'callback', 'callback' => function ($_SB, $_ARGS = null) {

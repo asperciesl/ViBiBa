@@ -110,7 +110,7 @@ if ($maintenance) {
 if ($_SB->user->user_current() == false) {
     if (explode('/', $_SERVER['REQUEST_URI'])[1] == 'api' and !empty($_CONFIG['api']['secret']) and !empty($_POST['api_secret']) and $_CONFIG['api']['secret'] == $_POST['api_secret']) {
         #API Access Exception
-    } elseif ($_SERVER['REQUEST_URI'] != '/app/login') {
+    } elseif ($_SERVER['REQUEST_URI'] != '/app/login' and $_SERVER['REQUEST_URI'] != '/app/debug') {
         $_SB->redirect('login');
     }
 } elseif ($_SB->db_current() == false and $_SERVER['REQUEST_URI'] != '/app/databases') {
