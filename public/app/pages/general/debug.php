@@ -26,7 +26,7 @@ use CoderCat\JWKToPEM\JWKConverter;
                                         <h2>$_COOKIE</h2>
                                         <pre><?php var_dump($_COOKIE);?></pre>
                                         <?php
-
+                                        $_CONFIG = $_SB->config();
                                         if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud'])) {
                                             ?>
                                             <h2>JWT</h2>
