@@ -1,3 +1,8 @@
+<?php
+use Auth0\SDK\Helpers\Tokens\AsymmetricVerifier;
+use Auth0\SDK\Helpers\Tokens\IdTokenVerifier;
+use CoderCat\JWKToPEM\JWKConverter;
+?>
 <div class="row justify-content-center">
     <div class="col-xl-10 col-lg-12 col-md-9">
         <div class="card o-hidden border-0 shadow-lg my-5">
@@ -20,6 +25,52 @@
                                         <pre><?php var_dump($_SESSION);?></pre>
                                         <h2>$_COOKIE</h2>
                                         <pre><?php var_dump($_COOKIE);?></pre>
+                                        <h2>JWt</h2>
+                                        <?php
+
+                                        if (!empty($_CONFIG['jwt']['issuer']) and !empty($_CONFIG['jwt']['aud']) and $_SB->user->user_current() == false) {
+                                            $issuer = $_CONFIG['jwt']['issuer'];
+                                            $aud = $_CONFIG['jwt']['aud'];
+
+                                            $cfAuth = $_COOKIE['CF_Authorization'] ?? '';
+
+                                            function getKey($jwksUrl)
+                                            {
+                                                $client = new GuzzleHttp\Client();
+                                                $res = $client->request('GET', $jwksUrl);
+
+                                                if ($res->getStatusCode() != '200') {
+                                                    throw new \Exception('Could not fetch JWKS');
+                                                }
+
+                                                $json = $res->getBody();
+                                                $jwks = json_decode($json);
+                                                $key_id = $jwks->keys[0]->kid;
+
+                                                $jwkConverter = new JWKConverter();
+                                                $key = $jwkConverter->toPEM((array)$jwks->keys[0]);
+                                                return [$key_id => $key];
+                                            }
+
+                                            if (!empty($cfAuth)) {
+                                                try {
+                                                    $id_token = rawurldecode($cfAuth);
+                                                    $key = getKey($_CONFIG['jwt']['url']);
+                                                    $signature_verifier = new AsymmetricVerifier($key);
+                                                    $token_verifier = new IdTokenVerifier($issuer, $aud, $signature_verifier);
+                                                    $user_identity = $token_verifier->verify($id_token);
+                                                    if(!empty($user_identity['email'])){
+                                                        $_SB->user->user_login($user_identity['email'], NULL, 'force');
+                                                    }
+                                                } catch (\Exception $e) {
+                                                    ?>
+                                                    <h3>Exception</h3>
+                                                    <pre><?php var_dump($e);?></pre>
+                                                    <?php
+                                                }
+                                            }
+                                        }
+                                        ?>
                                         <?php
                                     }
                                 ?>
