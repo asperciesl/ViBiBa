@@ -36,24 +36,6 @@ use CoderCat\JWKToPEM\JWKConverter;
 
                                             $cfAuth = $_COOKIE['CF_Authorization'] ?? '';
 
-                                            function getKey($jwksUrl)
-                                            {
-                                                $client = new GuzzleHttp\Client();
-                                                $res = $client->request('GET', $jwksUrl);
-
-                                                if ($res->getStatusCode() != '200') {
-                                                    throw new \Exception('Could not fetch JWKS');
-                                                }
-
-                                                $json = $res->getBody();
-                                                $jwks = json_decode($json);
-                                                $key_id = $jwks->keys[0]->kid;
-
-                                                $jwkConverter = new JWKConverter();
-                                                $key = $jwkConverter->toPEM((array)$jwks->keys[0]);
-                                                return [$key_id => $key];
-                                            }
-
                                             if (!empty($cfAuth)) {
                                                 try {
                                                     $id_token = rawurldecode($cfAuth);
