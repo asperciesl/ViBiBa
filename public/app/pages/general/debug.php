@@ -37,6 +37,10 @@ use Firebase\JWT\JWT;
                                             if (!empty($cfAuth)) {
                                                 try {
                                                     $jwt = rawurldecode($cfAuth);
+                                                    ?>
+                                                    <h3>$jwt</h3>
+                                                    <pre><?php var_dump($jwt);?></pre>
+                                                    <?php
                                                     $publicKey = getKey($_CONFIG['jwt']['url']);
                                                     $decoded = JWT::decode($jwt, $publicKey, array('RS256'));
                                                     ?>

@@ -17,7 +17,7 @@ docker-compose up
 ```
 For production mode please run
 ````
-docker-compose -f  docker-compose-prod.yml up
+docker-compose -d -f  docker-compose-prod.yml up
 ````
 On startup the mysql_dump/init.sql is automatically imported into the mysql docker container. When using persistent storage, the init.sql file won't be considered in consecutive startups.
 To overwrite the existing database you have to delete the persistent container e.g.:
