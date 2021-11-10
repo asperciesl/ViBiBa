@@ -1,7 +1,6 @@
 # ViBiBa
 
-# Cite
-Please cite:
+# Citation
 Asperger H, Cieslik JP, Alberter B, Köstler C, Polzer B, Müller V, Pantel K, Riethdorf S, Koch A, Hartkopf A, Wiesmüller L, Janni W, Schochter F, Franken A, Niederacher D, Fehm T, Neubauer H. ViBiBa: Virtual BioBanking for the DETECT multicenter trial program - decentralized storage and processing. Transl Oncol. 2021 Aug;14(8):101132. doi: 10.1016/j.tranon.2021.101132. Epub 2021 May 27. PMID: 34051621; PMCID: PMC8176360.
 
 # Getting Started
